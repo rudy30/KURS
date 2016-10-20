@@ -2,62 +2,8 @@
 #include <windows.h>
 #include <afxwin.h>
 #include "resource.h"
-//#include "resrc1.h"
-class CMyDialog : public CDialog
-{
-protected:
-	virtual void OnOK();
-	virtual void OnCancel();
-	virtual BOOL OnInitDialog();
-	
-};
-
-class CMyDialog : public CDialog
-{
-public:
-	CMyDialog(CWnd* pParent = NULL);
-	enum { IDD = IDD_DIALOG1};
-	CListBox m_size;
-	int	m_datatype;
-	CEdit  m_matrix;
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
-protected:
-	virtual void OnOK();
-	virtual void OnCancel();
-	virtual BOOL OnInitDialog();
-	
-};
-CMyDialog::CMyDialog(CWnd* pParent)
-	: CDialog(CMyDialog::IDD, pParent)
-{
-	m_datatype = 1;
-}
 
 
-void CMyDialog::DoDataExchange(CDataExchange* pDX)
-{
-	CDialog::DoDataExchange(pDX);
-	DDX_Slider(pDX, IDC_SLIDER1, m_size);
-	DDX_Slider(pDX, IDC_SLIDER2, m_size);
-	DDX_Slider(pDX, IDC_SLIDER3, m_size);
-	DDX_Slider(pDX, IDC_SLIDER4, m_size);
-	DDX_Slider(pDX, IDC_SLIDER5, m_size);
-	
-}
-
-
-
-
-
-void CMyDialog::OnCancel()
-{
-	CDialog::OnCancel();
-}
-BOOL CMyDialog::OnInitDialog()
-{
-	CDialog::OnInitDialog();
-}
 
 class CMyFrameWnd :public CFrameWnd
 {
@@ -69,26 +15,23 @@ protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnQuit();
 	afx_msg void OnAbout();
-//	afx_msg void OnFormulaResult();
-//	afx_msg void OnFormulaRun();
-//	afx_msg void OnDialog();
-//	afx_msg void OnFileOpen();
-//	afx_msg void OnFileSave();
-//	afx_msg void OnFileRename();
-//	afx_msg void OnHelp();
+	afx_msg void OnDialog();
+	afx_msg void OnFileOpen();
+	afx_msg void OnFileSave();
+	afx_msg void OnFormulaRun();
+	afx_msg void OnFormulaResult();
 	DECLARE_MESSAGE_MAP();
 };
 BEGIN_MESSAGE_MAP(CMyFrameWnd, CFrameWnd)
+	ON_WM_CREATE()
 	ON_COMMAND(ID_ABOUT, OnAbout)
 	ON_COMMAND(ID_FILE_QUIT, OnQuit)
-	ON_WM_CREATE()
-//	ON_COMMAND(ID_FORMULA_RESULT, OnFormulaResult)
-//	ON_COMMAND(ID_FORMULA_RUN, OnFormulaRun)
-//	ON_COMMAND(ID_DIALOG, OnDialog)
-//	ON_COMMAND(ID_FILE_OPEN40003, OnFileOpen)
-//	ON_COMMAND(ID_FILE_SAVERENAME, OnFileSave)
-//	ON_COMMAND(ID_FILE_RENAME, OnFileRename)
-//	ON_COMMAND(ID_HELP40008, OnHelp)
+	ON_COMMAND(ID_DIOLOG, OnDialog)
+	ON_COMMAND(ID_RESULT, OnFormulaResult)
+	ON_COMMAND(ID_RUN, OnFormulaRun)
+	ON_COMMAND(ID_FILE_OPEN40009, OnFileOpen)
+	ON_COMMAND(ID_FILE_SAVE, OnFileSave)
+
 END_MESSAGE_MAP();
 
 static UINT indicators[] =
@@ -122,34 +65,29 @@ int CMyFrameWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return 0;
 	}
 }
-//void CMyFrameWnd::OnHelp()
-//{
-//	::MessageBox(NULL, "...", "help", MB_OK | MB_ICONEXCLAMATION);
-//}
-//void CMyFrameWnd::OnFileRename()
-//{
-//	::MessageBox(NULL, "...", "rename", MB_OK | MB_ICONEXCLAMATION);
-//}
-//void CMyFrameWnd::OnFileSave()
-//{
-//	::MessageBox(NULL, "...", "save", MB_OK | MB_ICONEXCLAMATION);
-//}
-//void CMyFrameWnd::OnFileOpen()
-//{
-//	::MessageBox(NULL, "...", "open", MB_OK | MB_ICONEXCLAMATION);
-//}
-//void CMyFrameWnd::OnDialog()
-//{
-//	::MessageBox(NULL, "...", "Dialog", MB_OK | MB_ICONEXCLAMATION);
-//}
-//void CMyFrameWnd::OnFormulaRun()
-//{
-//	::MessageBox(NULL, "...", "Run", MB_OK | MB_ICONEXCLAMATION);
-//}
-//void CMyFrameWnd::OnFormulaResult()
-//{
-//	::MessageBox(NULL, "...", "Result", MB_OK | MB_ICONEXCLAMATION);
-//}
+
+
+
+void CMyFrameWnd::OnFileSave()
+{
+	::MessageBox(NULL, "...", "save", MB_OK | MB_ICONEXCLAMATION);
+}
+void CMyFrameWnd::OnFileOpen()
+{
+	::MessageBox(NULL, "...", "open", MB_OK | MB_ICONEXCLAMATION);
+}
+void CMyFrameWnd::OnDialog()
+{
+	::MessageBox(NULL, "...", "Dialog", MB_OK | MB_ICONEXCLAMATION);
+}
+void CMyFrameWnd::OnFormulaRun()
+{
+	::MessageBox(NULL, "...", "Run", MB_OK | MB_ICONEXCLAMATION);
+}
+void CMyFrameWnd::OnFormulaResult()
+{
+	::MessageBox(NULL, "...", "Result", MB_OK | MB_ICONEXCLAMATION);
+}
 void CMyFrameWnd::OnAbout()
 {
 	::MessageBox(NULL,  "Copyright by Semerenko", "About", MB_OK | MB_ICONEXCLAMATION);
